@@ -1,28 +1,42 @@
 import pytest
-# TODO: add necessary import
+from sklearn.ensemble import RandomForestClassifier
+from ml.model import (
+    train_model,
+    compute_model_metrics,
+    inference)
 
 # TODO: implement the first test. Change the function name and input as needed
-def test_one():
+def test_model_algortihm():
     """
-    # add description for the first test
+    Ensure the model produces a RandomForestClassifier model.
     """
-    # Your code here
-    pass
+    X_train = [[1,1,1,1,1],[1,1,1,1,1]]
+    y_train = [[1,1,1,1,1],[1,1,1,1,1]]
+    m = train_model(X_train, y_train)
+    assert isinstance(m, RandomForestClassifier) == True
 
 
 # TODO: implement the second test. Change the function name and input as needed
-def test_two():
+def test_compute_model_metrics():
     """
-    # add description for the second test
+    Ensure the compute_model_metrics function returns the expected values.
     """
-    # Your code here
-    pass
+    y_test = [1,1,1,1]
+    preds = [1,1,1,1]
+    p, r, fb = compute_model_metrics(y_test, preds)
+    metrics = [p, r, fb]
+    assert metrics == [1, 1, 1]
 
 
 # TODO: implement the third test. Change the function name and input as needed
-def test_three():
+def test_inference():
     """
-    # add description for the third test
+    Ensure the inference function returns expected results.
     """
-    # Your code here
-    pass
+    X_train = [[1,1,1,1,1],[1,1,1,1,1]]
+    y_train = [[1,1,1,1,1],[1,1,1,1,1]]
+    X_test = [[1,1,1,1,1],[1,1,1,1,1]]
+    rf = RandomForestClassifier()
+    model = rf.fit(X_train, y_train)
+    preds = inference(model, X_test)
+    assert preds.all()==1
